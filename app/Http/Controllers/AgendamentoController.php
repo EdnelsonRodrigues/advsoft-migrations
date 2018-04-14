@@ -9,6 +9,47 @@ use App\Modelos\Agendamento;
 
 class AgendamentoController extends Controller
 {
+    public function index()
+    {  
+        $agendamentos = Agendamento::all();
+        return view('agendamentos.index', compact('agendamentos', $agendamentos));
+    }
+
+    public function novo() //create
+    {
+        $advogados = Advogado::all();
+        return view('agendamentos.novo', compact('advogados', $advogados));
+    }
+
+    public function store(Request $request, Agendamento $agendamento) 
+    {
+        //validação
+        $request->validate([
+            
+            'advogado_id' => 'required',
+            'descricao' => 'required',
+            'data' => 'required',
+        ]);
+
+        $insere = $agendamento->create($request->all());
+
+        // Verifica se inseriu com sucesso
+        // Redireciona para a listagem das categorias
+        // Passa uma session flash success (sessão temporária)
+        if ($insere) {
+
+            return redirect('/agendamentos/'.$agendamento->id)->with('success', 'Agendamento inserido com sucesso!');
+            /*return redirect()
+                    ->route('agendamentos.index'.$agendamento->id)
+                    ->with('success', 'Agendamento inserido com sucesso!');*/
+
+            // Redireciona de volta com uma mensagem de erro
+            return redirect()->back()->with('error', 'Falha ao inserir');
+        }
+    }
+
+
+
     public function listarAgendamentos() 
     {
         //recuperando o advogado pelo nome pegando o primeiro registro

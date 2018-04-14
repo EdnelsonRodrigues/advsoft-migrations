@@ -7,6 +7,11 @@ use App\Modelos\Advogado;
 
 class AdvogadoController extends Controller
 {
+    public function index()
+    {
+        $advogados = Advogado::all();
+        return view('advogados.index', compact('advogados', $advogados));
+    }
     public function inserir()
     {
         /**
