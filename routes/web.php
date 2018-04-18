@@ -25,6 +25,11 @@ $this->get('agendamentos', 'AgendamentoController@index');
 $this->get('agendamentos/novo', 'AgendamentoController@novo');
 $this->post('agendamentos', 'AgendamentoController@store');
 
+//upload
+$this->get('file', 'FileController@create');
+$this->post('file', 'FileController@store');
+
+
 
 
 
