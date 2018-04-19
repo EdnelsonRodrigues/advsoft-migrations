@@ -12,13 +12,13 @@ class AgendamentoController extends Controller
     public function index()
     {  
         $agendamentos = Agendamento::all();
-        return view('agendamentos.index', compact('agendamentos', $agendamentos));
+        return view('agendamentos.index', compact('agendamentos'));
     }
 
     public function novo() //create
     {
         $advogados = Advogado::all();
-        return view('agendamentos.novo', compact('advogados', $advogados));
+        return view('agendamentos.novo', compact('advogados'));
     }
 
     public function store(Request $request, Agendamento $agendamento) 
@@ -26,15 +26,15 @@ class AgendamentoController extends Controller
         //validação
         $request->validate([
             
-            'advogado_id' => 'required',
-            'descricao' => 'required',
-            'data' => 'required',
+            'advogado_id'   => 'required',
+            'descricao'     => 'required',
+            'data'          => 'required',
         ]);
 
         $insere = $agendamento->create($request->all());
 
         // Verifica se inseriu com sucesso
-        // Redireciona para a listagem das categorias
+        // Redireciona para a listagem dos agendamentos
         // Passa uma session flash success (sessão temporária)
         if ($insere) {
 

@@ -19,6 +19,9 @@ $this->get('inserir-processo', 'ProcessoController@inserir');
 
 //advogado-view
 $this->get('advogados', 'AdvogadoController@index');
+$this->get('advogados/novo', 'AdvogadoController@novo');
+$this->post('advogados', 'AdvogadoController@store');
+$this->delete('advogados/{id}', 'AdvogadoController@destroy');
 
 //agendamento-view
 $this->get('agendamentos', 'AgendamentoController@index');
